@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchMe } from './store/slices/authSlice';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
+import Home from './pages/Home'; // Import Home
 import Dashboard from './pages/Dashboard';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
@@ -29,16 +30,21 @@ function App() {
         <Navbar />
         <main className="flex-grow">
           <Routes>
-            <Route element={<ProtectedRoute />}>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/profile" element={<Profile />} />
-            </Route>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            
+            {/* Protected Routes */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+
+            {/* Wildcard redirect to Home */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
-        {/* Global Toast Message container */}
         <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
       </div>
     </BrowserRouter>

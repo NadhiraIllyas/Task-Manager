@@ -32,18 +32,30 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:h-14">
           
-          {/* Logo Section */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="bg-indigo-600 text-white p-2.5 rounded-xl shadow-sm shadow-indigo-100 group-hover:bg-indigo-700 transition-colors">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div>
-              <span className="text-lg font-black text-slate-900 tracking-tight block">TaskFlow</span>
-              <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block">Task Management</span>
-            </div>
-          </Link>
+          {/* Logo & Dashboard Tab Section */}
+          <div className="flex items-center space-x-6">
+            <Link to={isAuthenticated ? "/dashboard" : "/"} className="flex items-center space-x-3 group">
+              <div className="bg-indigo-600 text-white p-2.5 rounded-xl shadow-sm shadow-indigo-100 group-hover:bg-indigo-700 transition-colors">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <span className="text-lg font-black text-slate-900 tracking-tight block">TaskFlow</span>
+                <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block">Task Management</span>
+              </div>
+            </Link>
+
+            {/* Sleek Dashboard Tab (visible only when logged in) */}
+            {isAuthenticated && (
+              <Link 
+                to="/dashboard" 
+                className="text-sm font-bold text-slate-600 hover:text-indigo-600 px-3 py-2 rounded-xl transition-colors hidden sm:block"
+              >
+                Dashboard
+              </Link>
+            )}
+          </div>
 
           {/* Center: Realtime Stats Pills */}
           {isAuthenticated && (
